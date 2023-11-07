@@ -25,7 +25,6 @@ app.post('/signup', async (req, res) => {
 
     //Store credentials and signup details in database
     
-
     res.status(201).json({ message: 'User registered' });
 });
 
