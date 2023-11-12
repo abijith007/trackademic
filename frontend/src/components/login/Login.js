@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import NavBar from '../common-components/NavBar/NavBar';
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { XCircleFill } from 'react-bootstrap-icons';
 import loginService from '../../services/loginService';
+import Toast from '../common-components/Toast/Toast';
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
-  const [email, setEmail] = useState('');
-  const [showLoginError, setShowLoginError] = useState(false)
-  const [password, setPassword] = useState('');
+  const [showLoginError, setShowLoginError] = useState(false)  
+  const [showToast, setShowToast] = useState(false);
+  const [isLoginLoading, setLoginLoading] = useState(false);
 
   const handleLogin = async (event) => {    
-    event.preventDefault();
+    event.preventDefault();    
+    setLoginLoading(true);
     const email = event.target[0].value.trim();
     const password = event.target[1].value.trim();    
     const loginSuccess = await loginService(email, password, dispatch);      
@@ -23,8 +23,15 @@ function Login() {
     if (loginSuccess) {
       navigate('/dashboard');
     }
+    else{
+      triggerToast();
+      setLoginLoading(false);
+    }
   };
   
+  const triggerToast = () => {        
+    setTimeout(() => setShowLoginError(false), 10000); 
+  };
 
   const goToSignup = () => {
     navigate("/signup");
@@ -32,47 +39,32 @@ function Login() {
 
   return (
     <>
-      <NavBar />
-      <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
-        <Row style={{ width: '40%' }}>
-          <Col className="my-auto mx-auto">
-            {showLoginError&&<h6 className='text-danger text-center mb-2'><XCircleFill size={20} className="me-2 my-auto"/>Username or Password is incorrect</h6>}
-            <Card style={{ width: '100%' }}>
-              <Card.Body>
-                <h2 className="text-center mb-4">Login</h2>
-                <Form onSubmit={handleLogin}>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Group>
-
-                  <Button variant="primary" type="submit" className="w-100 mb-1">
-                    Login
-                  </Button>
-                  <Button onClick={goToSignup} variant="secondary" className="w-100">
-                    Signup
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>       
-      </Container>      
+      <NavBar />      
+      {showLoginError && <Toast location='toast-end toast-top' type="danger" message="Incorrect Username of Password "/>}
+      <div className="relative flex flex-col items-center justify-center overflow-hidden height-90vh">
+        <div className="w-full p-6 bg-white border-t-8 border-blue-900 rounded-md shadow-md border-top-1 md:max-w-lg">
+            <h1 className="text-3xl font-semibold text-center text-gray-700">Login</h1>
+            <form className="space-y-4" onSubmit={handleLogin}>
+                <div>
+                    <label className="label">
+                        <span className="text-base label-text">Email</span>
+                    </label>
+                    <input type="text" placeholder="Email Address" className="w-full input input-bordered" />
+                </div>
+                <div>
+                    <label className="label">
+                        <span className="text-base label-text">Password</span>
+                    </label>
+                    <input type="password" placeholder="Enter Password"
+                        className="w-full input input-bordered" />
+                </div>
+                <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password?</a>
+                
+                <button className="w-100 btn btn-outline btn-primary text-white btn-wide btn-circle	">{!isLoginLoading ? <span>Login</span> : <span className="loading loading-spinner"></span>}</button>
+                <button className="w-100 btn text-white btn-secondary btn-wide btn-circle	">Register Now</button>
+            </form>
+        </div>
+    </div>    
     </>
   );
 }
