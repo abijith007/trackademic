@@ -9,6 +9,7 @@ const loginService = async (email, password, dispatch) => {
     });
 
     dispatch(setUser(response.data.userDetails));
+    axios.get('http://localhost:4000/protected',{withCredentials: true});
     return true;
   } catch (error) {
     console.error('Login error:', error);

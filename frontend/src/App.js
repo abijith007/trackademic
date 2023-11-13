@@ -4,6 +4,7 @@ import Login from './components/login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Dashboard from './components/dashboard/Dashboard';
+import Signup from './components/signup/Signup';
 
 
 function App() {  
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       {/* <Route path="/" element={<HomePage />} /> */}
       <Route path="/login" element={<Login />} />      
+      <Route path="/signup" element={<Signup />} />      
       <Route path="/dashboard" element={<Dashboard />} />      
     </Routes>
   </Router>

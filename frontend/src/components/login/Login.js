@@ -22,6 +22,7 @@ function Login() {
     setShowLoginError(!loginSuccess);    
     if (loginSuccess) {
       navigate('/dashboard');
+      setLoginLoading(false);
     }
     else{
       triggerToast();
@@ -60,8 +61,12 @@ function Login() {
                 </div>
                 <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password?</a>
                 
-                <button className="w-100 btn btn-outline btn-primary text-white btn-wide btn-circle	">{!isLoginLoading ? <span>Login</span> : <span className="loading loading-spinner"></span>}</button>
-                <button className="w-100 btn text-white btn-secondary btn-wide btn-circle	">Register Now</button>
+                <button type="submit" className="w-100 btn btn-outline btn-primary text-white btn-wide btn-circle">
+                  {!isLoginLoading ? <span>Login</span> : <span className="loading loading-spinner"></span>}
+                </button>
+                <button onClick={goToSignup} className="w-100 btn text-white btn-secondary btn-wide btn-circle">
+                  Register Now
+                </button>
             </form>
         </div>
     </div>    
