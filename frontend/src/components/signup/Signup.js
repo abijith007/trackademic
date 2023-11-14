@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { BadgeX } from 'lucide-react';
 import NavBar from '../common-components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import Toast from '../common-components/Toast/Toast';
 import signupService from '../../services/signupService';
 
-function Signup() {
-  const dispatch = useDispatch();
+function Signup() {  
   const navigate = useNavigate();
   const [showSignupError, setShowSignupError] = useState(false);
-  const [showToast, setShowToast] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [isSignupLoading, setSignupLoading] = useState(false);
 
