@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const signupService = async (userDetails) => {
   try {
-    const response = await axios.post('http://localhost:4000/signup', {
+    await axios.post('http://localhost:4000/signup', {
       userDetails
     });    
     return true

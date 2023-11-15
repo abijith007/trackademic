@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import NavBar from '../common-components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import loginService from '../../services/loginService';
 import Toast from '../common-components/Toast/Toast';
 
-function Login() {
+function Login() {  
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(state => state.user);
   const [showLoginError, setShowLoginError] = useState(false)  
-  const [showToast, setShowToast] = useState(false);
   const [isLoginLoading, setLoginLoading] = useState(false);
 
   const handleLogin = async (event) => {    
@@ -64,10 +62,10 @@ function Login() {
                 <button type="submit" className="w-100 btn btn-outline btn-primary text-white btn-wide btn-circle">
                   {!isLoginLoading ? <span>Login</span> : <span className="loading loading-spinner"></span>}
                 </button>
-                <button onClick={goToSignup} className="w-100 btn text-white btn-secondary btn-wide btn-circle">
+                <button type='button' onClick={goToSignup} className="w-100 btn text-white btn-secondary btn-wide btn-circle">
                   Register Now
-                </button>
-            </form>
+                </button>                
+            </form>            
         </div>
     </div>    
     </>

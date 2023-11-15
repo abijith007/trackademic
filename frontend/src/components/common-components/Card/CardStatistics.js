@@ -1,7 +1,7 @@
-function CardStatistics({ title, value, titleColor = "", valueColor = "", icon="" }) {  
+function CardStatistics({ title="", value="", titleColor = "", valueColor = "", icon="" }) {  
   return (
-    <div className="w-60 min-w-fit rounded-[25px] bg-white p-8"> {/* Removed 'aspect' */}
-      <div className="flex items-center"> {/* Updated class */}
+    <div className="min-w-fit shadow-xl rounded-3xl bg-white p-8 my-auto">
+      <div className="flex items-center">
         <div className={`h-12 my-auto ${valueColor}`}>
           {icon}
         </div>
