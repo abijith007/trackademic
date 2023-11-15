@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import NavBar from '../common-components/NavBar/NavBar';
 import SideDrawer from '../common-components/SideDrawer/SideDrawer';
 import CardStatistics from '../common-components/Card/CardStatistics';
@@ -56,6 +56,16 @@ const lineoptions = {
 
 function Dashboard() {
   const adjustedHeight = 'calc(100vh - 64px)';
+  const [isToggle, setIsToggle] = useState(false)  
+  const [opacity, setOpacity] = useState(1);
+
+  const toggleClock = () => {
+    setOpacity(0);
+    setTimeout(() => {
+      setIsToggle(!isToggle);
+      setOpacity(1); 
+    }, 500); 
+  }
 
   return (
     <>
@@ -84,10 +94,15 @@ function Dashboard() {
               <div className='col-span-2 row-span-2'>
                 <Announcement />
               </div>
-              <div className='my-auto mx-auto'>
-                {/* <Clock /> */}
-                <DigitalClock />
-              </div>
+              
+              <div
+      className="my-auto mx-auto w-44 cursor-pointer transition-opacity duration-500"
+      onClick={toggleClock}
+      style={{ opacity: opacity }}
+    >
+      {isToggle ? <Clock /> : <DigitalClock />}
+    </div>
+
               <CardStatistics
                 title={"Stale Issues"}
                 value={"130"}

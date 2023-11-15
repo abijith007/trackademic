@@ -69,8 +69,7 @@ class Clock extends React.Component {
               style={divStyleSeconds}></div>
             <div className="indicator-cover"></div>
           </div>
-        </div>
-        { /*<div className="digital"> {this.state.date.toLocaleTimeString()}</div>*/ }
+        </div>        
       </div>     
     );
   }
