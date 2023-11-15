@@ -1,4 +1,3 @@
-// userReducer.js
 const initialState = {
   userDetails: null,
   isLoggedIn: false,

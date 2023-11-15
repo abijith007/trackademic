@@ -4,8 +4,7 @@ import { Megaphone, X, Nfc } from 'lucide-react';
 const announcements = [
   { id: 1, title: "Announcement 1", content: "Content for Announcement 1" },
   { id: 2, title: "Announcement 2", content: "Content for Announcement 2" },
-  { id: 3, title: "Announcement 3", content: "Content for Announcement 3" },
-  // ... more announcements
+  { id: 3, title: "Announcement 3", content: "Content for Announcement 3" },  
 ];
 
 function Announcement() {
