@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON *.* TO 'trackademic'@'172.17.0.1' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;

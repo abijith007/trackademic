@@ -1,4 +1,4 @@
-import { ShieldX  } from 'lucide-react';
+import { ShieldX, UserCheck2  } from 'lucide-react';
 
 function Toast({location, type, message}) {  
   let icon;
@@ -6,6 +6,9 @@ function Toast({location, type, message}) {
     case 'danger': type = 'alert alert-danger';
                    icon = <ShieldX />
                    break;
+    case 'success': type = 'alert alert-success';
+                    icon = <UserCheck2/>
+                    break;
   }
   return (
     <div className={"p-0 mt-20 toast " + location} style={{display: 'block'}}>

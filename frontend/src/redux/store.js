@@ -4,7 +4,7 @@ import userReducer from './reducers/userReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  user: userReducer,  
 });
 
 const store = createStore(

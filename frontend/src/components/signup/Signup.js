@@ -7,6 +7,7 @@ import signupService from '../../services/signupService';
 function Signup() {  
   const navigate = useNavigate();
   const [showSignupError, setShowSignupError] = useState(false);
+  const [showSignupSuccess, setShowSignupSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [isSignupLoading, setSignupLoading] = useState(false);
 
@@ -21,16 +22,21 @@ function Signup() {
       password: event.target[3].value.trim(),
       confirmPassword: event.target[4].value.trim()
     }
-    debugger;
+    
     if (validateSignup(signupDetails))
-    {
-      const signupSuccess = signupService(signupDetails); // Replace with actual signup logic
+    {      
+      const signupSuccess = await signupService(signupDetails);
 
+      setShowSignupSuccess(signupSuccess);
       setShowSignupError(!signupSuccess);
-      if (signupSuccess) {
-        navigate('/login');
+      if (signupSuccess) {        
+        triggerSuccessToast();
+        setTimeout(() => {          
+          navigate('/login');
+      }, 2000);
+        
       } else {
-        triggerToast();
+        triggerErrorToast();
         setSignupLoading(false);
       }
     }
@@ -52,8 +58,12 @@ function Signup() {
     return true;
   }
 
-  const triggerToast = () => {
+  const triggerErrorToast = () => {
     setTimeout(() => setShowSignupError(false), 10000);
+  };
+
+  const triggerSuccessToast = () => {
+    setTimeout(() => setShowSignupSuccess(false), 10000);
   };
 
   const goToLogin = () => {
@@ -64,6 +74,7 @@ function Signup() {
     <>
       <NavBar />
       {showSignupError && <Toast location='toast-end toast-top' type="danger" message="Signup Error" />}
+      {showSignupSuccess && <Toast location='toast-end toast-top' type="success" message="You are registered successfully " />}
       <div className="relative flex flex-col items-center justify-center overflow-hidden height-90vh">
         <div className="w-full p-6 bg-white border-t-8 border-blue-900 rounded-md shadow-md border-top-1 sm:max-w-md md:max-w-lg lg:max-w-xl">
           <h1 className="text-3xl font-semibold text-center text-gray-700">Signup</h1>
