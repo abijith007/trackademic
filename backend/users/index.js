@@ -2,27 +2,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const path = require('path');
-const envPath = path.join(__dirname, '../../', '.env');
-require('dotenv').config({ path: envPath });
-
 const { authenticateJWT } = require('./middleware/authenticateJWT');
-const { loginUser } = require('./controllers/loginController');
-const { signupUser } = require('./controllers/signupController');
-const userRouter = express.Router();
+const { userLogin, adminLogin } = require('./controllers/loginController');
+const { userSignup, adminSignup } = require('./controllers/signupController');
 
 const app = express();
 const PORT = 4001;
 
 app.use(bodyParser.json());
-app.use(cors({origin: process.env.REACT_SERVICE, credentials: true}));
+app.use(cors({origin: 'http://localhost:3000', credentials: true}));
 app.use(cookieParser())
 
-app.use('/', userRouter);
+
 // Routes
-userRouter.post('/signup', signupUser);
-userRouter.post('/login', loginUser);
-userRouter.get('/protected', authenticateJWT, (req, res) => {
+app.post('/signup', userSignup);
+app.post('/login', userLogin);
+
+app.post('/admin/signup', authenticateJWT, adminSignup);
+app.post('/admin/login', authenticateJWT, adminLogin);
+
+app.get('/protected', authenticateJWT, (req, res) => {
     res.json({ message: 'You accessed a protected route!', user: req.user });
 });
 

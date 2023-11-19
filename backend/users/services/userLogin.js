@@ -1,9 +1,6 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const {Credentials} = require('../ORM/models/models');
-const path = require('path');
-const envPath = path.join(__dirname, '../../', '.env');
-require('dotenv').config({ path: envPath });
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { Credentials } = require("../ORM/models/models");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 async function loginUser(req, res) {
@@ -14,8 +11,8 @@ async function loginUser(req, res) {
         if (!user) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
-
         const isValid = await bcrypt.compare(password, user.password);
+        
         if (!isValid) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
@@ -34,6 +31,4 @@ async function loginUser(req, res) {
     }
 }
 
-module.exports = {
-    loginUser
-};
+module.exports = loginUser;

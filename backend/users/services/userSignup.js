@@ -1,7 +1,8 @@
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const {Users, Credentials} = require('../ORM/models/models');
-const sequelize = require('../ORM/sequelize');
+const bcrypt = require("bcrypt");
+const { Users, Credentials } = require("../ORM/models/models");
+const sequelize = require("../ORM/sequelize");
+const { saltRounds } = require('../controllers/signupController');
+
 
 async function signupUser(req, res) {
   const userDetails = {
@@ -9,7 +10,7 @@ async function signupUser(req, res) {
     firstName: req.body.userDetails.firstName,
     lastName: req.body.userDetails.lastName,
     password: req.body.userDetails.password,
-  }
+  };
 
   try {
     const hashedPassword = await bcrypt.hash(userDetails.password, saltRounds);
@@ -40,4 +41,4 @@ async function signupUser(req, res) {
   }
 }
 
-module.exports = {signupUser};
+module.exports = signupUser;
