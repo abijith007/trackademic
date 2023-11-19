@@ -1,7 +1,6 @@
 {
-  "name": "login",
+  "name": "users",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -23,5 +22,6 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.3",
     "sequelize": "^6.35.0"
-  }
+  },
+  "description": ""
 }
