@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const envPath = path.join(__dirname, '../', '.env');
 const { authenticateJWT } = require('./middleware/authenticateJWT');
+
 require('dotenv').config({ path: envPath });
 const issuesRouter = express.Router();
 const app = express();
@@ -19,7 +20,7 @@ app.use(cookieParser())
 
 
 // Routes
-app.use('/', issuesRouter);
+app.use('/', authenticateJWT, issuesRouter);
 issuesRouter.get('/issues', getIssues);
 issuesRouter.get('/issueByID', getIssueById);
 issuesRouter.get('/issuesByFilter', getIssuesByFilter);
