@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { Users, Credentials } = require("../ORM/models/models");
 const sequelize = require("../ORM/sequelize");
-const { saltRounds } = require('../controllers/signupController');
+const saltRounds = 10;
 
 
 async function signupUser(req, res) {
