@@ -8,6 +8,7 @@ import DigitalClock from '../common-components/DigitalClock/DigitalClock';
 import Announcement from '../common-components/Announcement/Announcement';
 import PieChart from '../common-components/Charts/PieChart/PieChart';
 import { LineChart } from '../common-components/Charts/LineChart/LineChart';
+import Chatbot from '../common-components/Chatbot/Chatbot';
 
 
 const chartdata = [
@@ -134,6 +135,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
+        <Chatbot/>
       </div>
     </>)
 }
