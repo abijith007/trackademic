@@ -95,7 +95,7 @@ function Dashboard() {
               <div className='col-span-2 row-span-2'>
                 <Announcement />
               </div>
-              
+
               <div
       className="my-auto mx-auto w-44 cursor-pointer transition-opacity duration-500"
       onClick={toggleClock}

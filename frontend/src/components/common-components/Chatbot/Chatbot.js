@@ -1,6 +1,5 @@
 import { X } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
-import 'tailwindcss/tailwind.css';
 import './Chatbot.css';
 
 const ChatBubble = ({ message, time, sender, avatar, isUser }) => {

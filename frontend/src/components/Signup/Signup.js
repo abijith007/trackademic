@@ -22,7 +22,7 @@ function Signup() {
       password: event.target[3].value.trim(),
       confirmPassword: event.target[4].value.trim()
     }
-    
+
     if (validateSignup(signupDetails))
     {      
       const signupSuccess = await signupService(signupDetails);
@@ -34,7 +34,7 @@ function Signup() {
         setTimeout(() => {          
           navigate('/login');
       }, 2000);
-        
+
       } else {
         triggerErrorToast();
         setSignupLoading(false);

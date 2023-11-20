@@ -27,7 +27,7 @@ function Login() {
       setLoginLoading(false);
     }
   };
-  
+
   const triggerToast = () => {        
     setTimeout(() => setShowLoginError(false), 10000); 
   };
@@ -58,7 +58,7 @@ function Login() {
                         className="w-full input input-bordered" />
                 </div>
                 <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forget Password?</a>
-                
+
                 <button type="submit" className="w-100 btn btn-outline btn-primary text-white btn-wide btn-circle">
                   {!isLoginLoading ? <span>Login</span> : <span className="loading loading-spinner"></span>}
                 </button>

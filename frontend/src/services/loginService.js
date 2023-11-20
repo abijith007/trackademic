@@ -14,7 +14,7 @@ const loginService = async (email, password, dispatch) => {
     return true;  
   } catch (error) {
     console.error('Login error:', error);
-    return true;
+    return false;
   }
 };
 
