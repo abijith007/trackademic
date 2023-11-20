@@ -8,9 +8,7 @@ const loginService = async (email, password, dispatch) => {
       email,
       password,
     });
-
-    dispatch(setUser(response.data.userDetails));
-    axios.get('http://localhost:4002/issues',{withCredentials: true});
+    dispatch(setUser(response.data.userDetails));    
     return true;  
   } catch (error) {
     console.error('Login error:', error);
