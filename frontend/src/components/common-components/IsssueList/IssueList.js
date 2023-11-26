@@ -76,6 +76,21 @@ const Example = () => {
             },
           },
           {
+            accessorFn: (row) => new Date(row.dueDate),
+            id: 'dueDate',
+            header: 'Due Date',
+            filterVariant: 'date',
+            filterFn: 'lessThan',
+            sortingFn: 'datetime',
+            Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(),
+            Header: ({ column }) => <em>{column.columnDef.header}</em>,
+            muiFilterTextFieldProps: {
+              sx: {
+                minWidth: '250px',
+              },
+            },
+          },
+          {
             accessorKey: 'issueDescription',
             header: 'Issue Description',
             size: 300,
