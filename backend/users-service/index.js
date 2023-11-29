@@ -9,6 +9,7 @@ require('dotenv').config({ path: envPath });
 const { authenticateJWT } = require('./middleware/authenticateJWT');
 const { userLogin, adminLogin } = require('./controllers/loginController');
 const { userSignup, adminSignup } = require('./controllers/signupController');
+const { getUsers } = require('./controllers/userController');
 
 const app = express();
 const PORT = 4001;
@@ -22,6 +23,8 @@ app.use('/users', userRouter);
 // Routes
 userRouter.post('/signup', userSignup);
 userRouter.post('/login', userLogin);
+userRouter.get('/getUsers', getUsers);
+
 
 userRouter.post('/admin/signup', adminSignup);
 userRouter.post('/admin/login', adminLogin);

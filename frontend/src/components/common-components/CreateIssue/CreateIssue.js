@@ -1,16 +1,20 @@
 import { Plus, X } from 'lucide-react';
 import React, { useState } from 'react';
 import createIssueService from '../../../services/createIssueService';
+import getUsersService from '../../../services/getUsersService';
 
 const CreateIssue = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsModalOpen(true);
+  const [assignees, setAssignees] = useState([]);
+  
+  const handleButtonClick = async () => {
+    setIsModalOpen(true);    
+    setAssignees(await getUsersService());
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    console.log(assignees);
   };
 
   const handleSubmit = (event) => {
@@ -18,24 +22,20 @@ const CreateIssue = () => {
   
     const title = event.target.elements.title.value;
     const description = event.target.elements.description.value;
-    const dueDate = event.target.elements.dueDate.value;
-    const assignee = 3;
+    const assignee = Number(event.target.elements.assignee.value);
     const status = 'todo';
     const createdBy = 1;
     const formData = {
       title,
-      description,
-      dueDate,
+      description,      
       assignee,
       status,
       createdBy
     };
     createIssueService(formData);
-    
-    handleCloseModal();
-  };
 
-  const assignees = ["Alice", "Bob", "Charlie", "Dana"];
+    handleCloseModal();
+  };  
 
   return (
     <div className="fixed top-0 right-0 m-4">
@@ -83,8 +83,8 @@ const CreateIssue = () => {
                   Assigned To
                 </label>
                 <select className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="assignee">
-                  {assignees.map(assignee => (
-                    <option key={assignee} value={assignee}>{assignee}</option>
+                  {assignees?.map(assignee => (
+                    <option key={assignee.userID} value={assignee.userID}>{assignee.firstName + ' ' + assignee.lastName}</option>
                   ))}
                 </select>
               </div>

@@ -3,9 +3,9 @@ const apiUrl = process.env.REACT_APP_ISSUE_SERVICE;
 
 const createIssueService = async (issueDetails) => {
   try {
-    const response = await axios.post(`${apiUrl}/issues/create`, {
+    const response = await axios.post(`${apiUrl}/issues/create`,
      issueDetails
-    },{      withCredentials: true
+    ,{      withCredentials: true
     }); 
     console.log(response)   
     return true;  

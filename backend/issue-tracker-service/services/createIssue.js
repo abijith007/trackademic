@@ -1,7 +1,7 @@
 const { Issues } = require('../ORM/models/models');
 
 module.exports = createIssueService = async (issueDetails) => {
-  // console.log(data);
+  console.log("Hello" , issueDetails);
   await Issues.create({
     title: issueDetails.title,
     description: issueDetails.description,
