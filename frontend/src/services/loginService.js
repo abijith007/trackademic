@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { setUser } from '../redux/actions/userActions';
-const apiUrl = process.env.REACT_APP_USER_SERVICE;
+const apiUrl = process.env.REACT_APP_API_GATEWAY_SERVICE;
 
 const loginService = async (email, password, dispatch) => {
   try {
-    const response = await axios.post(`${apiUrl}/login`, {
+    const response = await axios.post(`${apiUrl}/users/login`, {
       email,
       password,
     });
+
     dispatch(setUser(response.data.userDetails));    
     return true;  
   } catch (error) {

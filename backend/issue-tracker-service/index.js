@@ -3,9 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const envPath = path.join(__dirname, '../', '.env');
 const { authenticateJWT } = require('./middleware/authenticateJWT');
-
+const envPath = path.join(__dirname, '../', '.env');
 require('dotenv').config({ path: envPath });
 const issuesRouter = express.Router();
 const app = express();
@@ -20,12 +19,12 @@ app.use(cookieParser())
 
 
 // Routes
-app.use('/', authenticateJWT, issuesRouter);
-issuesRouter.get('/issues', getIssues);
+app.use('/issues', issuesRouter);
+issuesRouter.get('/getIssues', getIssues);
 issuesRouter.get('/issueByID', getIssueById);
 issuesRouter.get('/issuesByFilter', getIssuesByFilter);
-issuesRouter.post('/issue', createIssue);
-issuesRouter.put('/issue', updateIssue);
+issuesRouter.post('/create', createIssue);
+issuesRouter.put('/update', updateIssue);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

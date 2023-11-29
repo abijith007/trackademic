@@ -1,9 +1,9 @@
 import axios from 'axios';
-const apiUrl = process.env.REACT_APP_USER_SERVICE;
+const apiUrl = process.env.REACT_APP_API_GATEWAY_SERVICE;
 const signupService = async (userDetails) => {
   try {
     debugger;
-    await axios.post(`${apiUrl}/signup`, {
+    await axios.post(`${apiUrl}/users/signup`, {
       userDetails
     });    
     return true

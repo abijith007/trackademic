@@ -8,16 +8,10 @@ import {
   MRT_ToggleFiltersButton,
 } from 'material-react-table';
 import {
-  Box,
-  Button,
-  Typography,
+  Box,  
   lighten,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
 } from '@mui/material';
-import { AccountCircle, Send } from '@mui/icons-material';
+import { X } from 'lucide-react';
 import { data } from './makeData';
 
 const Example = () => {
@@ -25,14 +19,17 @@ const Example = () => {
   const [selectedRowData, setSelectedRowData] = useState(null);
 
   const openRowPopup = (row) => {
-    setSelectedRowData(row.original);
+    debugger;
+    setSelectedRowData(row.original);    
     setIsRowPopupOpen(true);
   };
 
   const closeRowPopup = () => {
+    console.log(selectedRowData)
     setSelectedRowData(null);
     setIsRowPopupOpen(false);
-  };
+    console.log(isRowPopupOpen)
+  };  
 
   const columns = useMemo(
     () => [
@@ -109,11 +106,12 @@ const Example = () => {
     enableGrouping: true,
     enableColumnPinning: true,
     enableFacetedValues: true,
-    enableRowSelection: true,
-    initialState: { showColumnFilters: true, showGlobalFilter: true },
+    enableRowSelection: false,
+    initialState: { showColumnFilters: false, showGlobalFilter: false },
     paginationDisplayMode: 'pages',
     positionToolbarAlertBanner: 'bottom',
     onRowClick: (row) => {
+      console.log(row)
       openRowPopup(row);
     },
     renderTopToolbar: ({ table }) => {
@@ -139,24 +137,21 @@ const Example = () => {
   return (
     <div>
       <MaterialReactTable table={table} />
-
-      <Dialog open={isRowPopupOpen} onClose={closeRowPopup}>
-        <DialogTitle>Row Details</DialogTitle>
-        <DialogContent>
-          {selectedRowData && (
-            <div>
-              <Typography variant="h6">Issue ID: {selectedRowData.issueId}</Typography>
-              <Typography variant="body1">Issue Title: {selectedRowData.issueTitle}</Typography>
-              <Typography variant="body1">Created By: {selectedRowData.createdBy}</Typography>
-              <Typography variant="body1">Assigned To: {selectedRowData.assignedTo}</Typography>
-              {/* Add more details as needed */}
+      {isRowPopupOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+          <div className="flex h-full justify-center items-center">
+            <div className="modal-box w-10/12 max-w-3xl relative">
+              <form method="dialog">                
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-5 top-5" onClick={() => closeRowPopup()}><X size={26} /></button>
+              </form>
+              <h2 className="text-3xl flex flex-1 ">{selectedRowData?.issueTitle}</h2>
+              <p className="py-4 text-lg"></p>
+              <div className="modal-action">
+              </div>
             </div>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeRowPopup}>Close</Button>
-        </DialogActions>
-      </Dialog>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

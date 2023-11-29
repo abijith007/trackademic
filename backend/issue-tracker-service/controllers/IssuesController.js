@@ -6,7 +6,8 @@ const createIssueService = require('../services/createIssue.js');
 
 
 async function getIssues(req, res) {
-  await getIssuesService();
+  const response = await getIssuesService();
+  res.send(response);
 }
 
 async function getIssueById(req, res) {
@@ -21,7 +22,9 @@ async function updateIssue(req, res) {
 }
 
 async function createIssue(req, res) {
+  console.log(req.body)  
   await createIssueService(req.body);
+  res.send({message:"Success"})
 }
 
 module.exports = {getIssues, getIssueById, getIssuesByFilter, createIssue, updateIssue};

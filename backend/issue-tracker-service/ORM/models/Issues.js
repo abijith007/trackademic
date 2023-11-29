@@ -31,7 +31,7 @@ const Issues = sequelize.define('Issues', {
   attachmentID: {
     type: DataTypes.STRING,
     allowNull: true, 
-  }  
+  },  
 }, {
   timestamps: true,
   freezeTableName: true

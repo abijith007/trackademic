@@ -5,6 +5,7 @@ require('dotenv').config({ path: envPath });
 
 
 async function userLogin(req,res){
+    console.log("LOGIN")
     await loginUser(req,res);
 }
 
