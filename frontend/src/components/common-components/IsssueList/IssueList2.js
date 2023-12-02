@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import getIssuesService from '../../../services/getIssuesService';
 import getUsersService from '../../../services/getUsersService';
+import updateIssueService from '../../../services/updateIssueService';
 
 const filterKeyMap = {
   'Issue ID': 'issueID',
@@ -29,23 +30,36 @@ const IssueList = () => {
     const getAllData = async () => {
       setIsLoading(true);
       setData(await getIssuesService());
-      setAssigneeList(await getUsersService());
-      console.log(data);
+      setAssigneeList(await getUsersService());      
       setIsLoading(false);
     };
     getAllData();
   }, []);
 
+  const refresh = async () =>{
+    setData(await getIssuesService());
+  }
+
   const openModal = (rowData) => {
     setSelectedRowData(rowData);
     setEditableIssue({ ...rowData });
+    console.log(rowData)
     setIsModalOpen(true);
   };
 
   const closeModal = () => setIsModalOpen(false);
 
-  const handleUpdate = () => {
-    
+  const handleUpdate = async () => {    
+    const formData = new FormData();
+    formData.append('issueID', editableIssue.issueID);
+    formData.append('title', editableIssue.title);
+    formData.append('description', editableIssue.description);    
+    formData.append('assignee', editableIssue.assignee);
+    formData.append('createdBy', editableIssue.createdBy);
+    formData.append('file', selectedFile);    
+    await updateIssueService(formData);    
+    refresh();
+    closeModal();
   }
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -164,6 +178,9 @@ const IssueList = () => {
   return (
     <div className="m-5 p-2.5 bg-white w-full rounded-3xl shadow-xl">
       <div className="overflow-x-auto">
+        <div className='flex flex-1'>
+          <button className='btn btn-light btn-sm' onClick={()=>refresh()}>Refresh</button>
+        </div>
         <table className="table table-zebra w-full">
           <thead>
             <tr>
@@ -288,7 +305,7 @@ const IssueList = () => {
            <button
                type="button"
                className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-               onClick={handleUpdate}
+               onClick={()=>handleUpdate()}
              >
                Update
              </button>

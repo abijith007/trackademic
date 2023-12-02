@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "macro-pulsar-397402",
+  "private_key_id": "53d34600f0d7d119804c88a88c11a68f531c3e08",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCeXg4y/wHe0liL\nPRVhLzepTsDjIOMMFzxHPolbkRcoFiZFDD6PqTmEjnUE8KcLsKHTyV24ySI9NlIF\nmy1/wltzZto2c5GVehaK6VOpnCJUx0WDGIBGW49ZrtEvaN9Y20pS2+w2VJfMN87K\noIV18BlyBYJsGukroci5+1yGVmZ2o4XOnpQ3b8Q7O0HcZKfUrwAaOkw0DddZIu/b\nYoHW2fPl6xLaT+5H0GLkum7uKjF3EM/zR2RIllz1FDWfUYVK84PZPUtva/UJVAiS\nN5fg9R6bDF3d9sMHhr/qyleMSMC9zn3IbvbAev8o4C6O/M4gVczwW9sGF88lJvex\naBTU2dVdAgMBAAECggEANmbW99uz18hoVESCgKUIuOdtyVg1xqSAt3SbGNJpowKg\n2N1Q7GbUdF2/gxfsOk7N+IPW5zBoy6BKYtSgt5+bbLQrR8NBgpiy/7sRW1VgUcE2\ndsdG4WR4hPVRtLiQ6ORDztzvcuZyUtvk9KRZ1F7LTujnmZ1Q9gUYgBMCAL/TaPNP\nII7GH+A/po/eHUPq8DOqjUckd9E9d99PXANbBLdpCH7xVu31nprkz1l8vge+ulNJ\n7apz2ApwGrkUpFomUpOuKGvmXA5OS1GIaJAlFMBMXqkqHE7fDs21jEpeR0wBmZ7D\nGILGyFbdBE/Ry6LUniiSv1UygQO7UA+PhpJS8Q+O/QKBgQDKDI0ZvYAUB3JRrvkz\nRXjyJ43zRbBkIZj4pHFeYDo8kHipugI2eja/D5vS1eIZkqewbCVSEy8LS+B5BTXt\nBOPq4YTCzwcwcvSGNv5M5H8+Ky0kZ/l5/fJStA4TXkOVZTA1pIlzIQkcU/d00hCT\nUGfqBeK+e4YtGGEdmj2C6g3j/wKBgQDIp5AoRDbmcfIGqwxplbhQgRb3evZDtO6H\nrqCM6GNQrPLZrgrTh/UAvm49w8m6VEH1NGoi0+RsYacApHJTo+J9r92SfGKDLzoR\nIdO3zGbDU8Ga5TkGhQFqZ7ZQDhv+FOYMeO6P8qnUDvjquziqAupil8hEsMvTvpMS\no1RadJZWowKBgQCgOB232KZ0u4bysR6ZgrCqzaTp0UxTyrSkDrp7jTEBD8svQ/o3\nOuioz3bQVJzLjJj+9HMPx3iZq5ygOvqNLkCR5C1D0amwyKeQupEjZlpkcRaF9RFG\npJKA9Jjo0Ook0K3PC9+W9Q5lcUwcTeuo9azBTdOFGyzGG7v/Hm1Cn9lN/wKBgQCX\nqg/MX8MfbAEECUXYiNJIB0rUxJxfkOK6q8OuvfhTgmYNIwAL4zfM2CN7jAFuVUGF\nlZijuoVtZmJUmffQQI9xcPyJPHs5rPi2+lqNEnKaMTSlX5060E3Bn6Kt3/xIkINR\n6hZnt4OmRarfwaOS3aFL5G37faaS5flEnS+lL3pzAQKBgBd00EJf15nfPggLZpPS\nBzAVfHBbB7x3cEDVD8jX2sZe+3nw1eDfNTPy4FRXEHv1TGthEeio0imMq+Ljd7uM\nQrBS3r/3C6DRgokv7zkPkAddKoON206sO29W9DfYmvGInXNAnS3uNjbbG+Y/7NGH\nzK8qF4Fr4QqnV0VuI7AwfvBK\n-----END PRIVATE KEY-----\n",
+  "client_email": "trackademic@macro-pulsar-397402.iam.gserviceaccount.com",
+  "client_id": "104013429772473601786",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/trackademic%40macro-pulsar-397402.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

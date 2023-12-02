@@ -18,12 +18,14 @@ async function getIssuesByFilter(req, res) {
 }
 
 async function updateIssue(req, res) {
-  await updateIssueService(req.body);
+  console.log(req.body, req.file)  
+  await updateIssueService(req.body, req.file);
+  res.send({message:"Success"})
 }
 
 async function createIssue(req, res) {
-  console.log(req.body)  
-  await createIssueService(req.body);
+  console.log(req.body, req.file)  
+  await createIssueService(req.body, req.file);
   res.send({message:"Success"})
 }
 

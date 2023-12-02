@@ -8,7 +8,7 @@ const loginService = async (email, password, dispatch) => {
       email,
       password,
     });
-
+    console.log(response.data);
     dispatch(setUser(response.data.userDetails));    
     return true;  
   } catch (error) {

@@ -28,7 +28,7 @@ const Issues = sequelize.define('Issues', {
     type: DataTypes.INTEGER,
     allowNull: false, 
   },
-  attachmentID: {
+  attachmentURL: {
     type: DataTypes.STRING,
     allowNull: true, 
   },  

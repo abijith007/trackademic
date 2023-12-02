@@ -4,8 +4,7 @@ const envPath = path.join(__dirname, '../../', '.env');
 require('dotenv').config({ path: envPath });
 
 
-async function userLogin(req,res){
-    console.log("LOGIN")
+async function userLogin(req,res){    
     await loginUser(req,res);
 }
 

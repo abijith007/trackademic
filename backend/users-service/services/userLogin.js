@@ -24,7 +24,7 @@ async function loginUser(req, res) {
             maxAge: 12 * 60 * 60 * 1000
         });
 
-        res.json({ message: 'Logged in successfully' });
+        res.json({ message: 'Logged in successfully', userDetails: {userID: user.userID} });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Internal server error' });
