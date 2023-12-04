@@ -24,19 +24,34 @@ const CreateIssue = () => {
     setFile(event.target.files[0]); // Update the file state
   };
 
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const title = event.target.elements.title.value;
     const description = event.target.elements.description.value;    
     const assignee = event.target.elements.assignee.value;    
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);    
-    formData.append('assignee', assignee);
-    formData.append('createdBy', userID);
-    formData.append('file', file);    
-    await createIssueService(formData);
+    let attachment = '';
+    if (file) {
+      attachment = await fileToBase64(file); // Await the resolution of the promise
+    }
+
+    let payload = {
+      title: title,
+      description: description,
+      assignee: assignee,
+      createdBy: userID,
+      attachment: attachment
+    }
+     console.log(attachment); 
+    await createIssueService(payload);
     setFile(null);
     handleCloseModal();
   };

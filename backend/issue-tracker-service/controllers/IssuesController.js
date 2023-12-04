@@ -24,8 +24,8 @@ async function updateIssue(req, res) {
 }
 
 async function createIssue(req, res) {
-  console.log(req.body, req.file)  
-  await createIssueService(req.body, req.file);
+  console.log(req)  
+  await createIssueService(req.body, req.body.file);
   res.send({message:"Success"})
 }
 

@@ -49,15 +49,30 @@ const IssueList = () => {
 
   const closeModal = () => setIsModalOpen(false);
 
-  const handleUpdate = async () => {    
-    const formData = new FormData();
-    formData.append('issueID', editableIssue.issueID);
-    formData.append('title', editableIssue.title);
-    formData.append('description', editableIssue.description);    
-    formData.append('assignee', editableIssue.assignee);
-    formData.append('createdBy', editableIssue.createdBy);
-    formData.append('file', selectedFile);    
-    await updateIssueService(formData);    
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+  
+  const handleUpdate = async () => {
+    let attachment = '';
+    if (selectedFile) {
+      attachment = await fileToBase64(selectedFile); // Await the resolution of the promise
+    }
+
+    let payload = {
+      issueID: editableIssue.issueID,
+      title: editableIssue.title,
+      description: editableIssue.description,
+      assignee: editableIssue.assignee,
+      createdBy: editableIssue.createdBy,
+      attachment: attachment
+    }        
+    await updateIssueService(payload);    
     refresh();
     closeModal();
   }
@@ -91,6 +106,7 @@ const IssueList = () => {
 
   const sortedAndFilteredData = useMemo(() => {
     if (isLoading) return [];
+    console.log(data);    
     let sortableItems = [...data];
     
     Object.keys(filters).forEach((filterKey) => {

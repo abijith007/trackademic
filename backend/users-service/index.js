@@ -18,7 +18,7 @@ const userRouter = express.Router();
 app.use(bodyParser.json());
 app.use(cors({origin: process.env.REACT_SERVICE, credentials: true}));
 app.use(cookieParser())
-app.use('/users', userRouter);
+app.use('/users',userRouter);
 
 // Routes
 userRouter.post('/signup', userSignup);

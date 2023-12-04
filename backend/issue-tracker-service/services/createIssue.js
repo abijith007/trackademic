@@ -4,7 +4,8 @@ const storage = new Storage({ keyFilename: '../trackademic.json' });
 const bucketName = 'trackademic';
 
 module.exports = createIssueService = async (issueDetails, attachment) => {    
-  // Create the issue in the database
+  // Create the issue in the database  
+  console.log(issueDetails);
   const issue = await Issues.create({
     title: issueDetails.title,
     description: issueDetails.description,

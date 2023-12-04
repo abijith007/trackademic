@@ -7,8 +7,10 @@ const loginService = async (email, password, dispatch) => {
     const response = await axios.post(`${apiUrl}/users/login`, {
       email,
       password,
+    }, {
+      withCredentials: true
     });
-    console.log(response.data);
+    console.log(response);
     dispatch(setUser(response.data.userDetails));    
     return true;  
   } catch (error) {

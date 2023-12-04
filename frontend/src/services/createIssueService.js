@@ -1,5 +1,5 @@
 import axios from 'axios';
-const apiUrl = process.env.REACT_APP_ISSUE_SERVICE;
+const apiUrl = process.env.REACT_APP_API_GATEWAY_SERVICE;
 
 const createIssueService = async (issueDetails) => {
   try {

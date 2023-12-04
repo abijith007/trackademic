@@ -26,11 +26,11 @@ app.use(cookieParser())
 
 // Routes
 app.use('/issues', issuesRouter);
-issuesRouter.get('/getIssues', getIssues);
+issuesRouter.get('/getIssues', authenticateJWT, getIssues);
 issuesRouter.get('/issueByID', getIssueById);
 issuesRouter.get('/issuesByFilter', getIssuesByFilter);
-issuesRouter.post('/create', upload.single('file'), createIssue);
-issuesRouter.put('/update', upload.single('file'), updateIssue);
+issuesRouter.post('/create', authenticateJWT, createIssue);
+issuesRouter.put('/update', authenticateJWT, updateIssue);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
