@@ -11,7 +11,7 @@ const PORT = 3002;
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/chatbot", (req, res) => {
-  const textFromChatbot = "Create a new issue for the customer service department. As the customer is reporting that they are unable to log in to their account. ";
+  const textFromChatbot = req.body.message;
   const pythonProcess = spawn('python', ['nlp_client.py', textFromChatbot]);
   let pythonResponse = '';
   pythonProcess.stdout.on('data', (data) => {
@@ -21,9 +21,8 @@ app.use("/chatbot", (req, res) => {
     if (code === 0) {
       try {
         const jsonResponse = JSON.parse(pythonResponse);
-        res.json(jsonResponse);
-        res.send(jsonResponse);
-        return res.json({ message: "Response sent successfully" })
+        console.log('Chatbot Response:', jsonResponse);
+        return res.json(jsonResponse)
       } catch (error) {
         res.status(500).json({ error: "Failed to parse JSON response from Python script" });
       }
