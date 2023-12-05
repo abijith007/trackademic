@@ -54,6 +54,27 @@ app.use('/issues', (req, res, next) => {
   });  
 });
 
+app.use('/chatbot', (req, res, next) => {
+  const apiUrl = 'http://localhost:4003' + req.originalUrl;    
+  axios({
+    method: req.method,
+    url: apiUrl,
+    data: req.body,
+    headers: {...req.headers}
+  })
+  .then(response => {    
+    console.log(response.data, response.status);
+    res.status(response.status).set(response.headers).send(response.data);
+  })
+  .catch(error => {    
+    if (error.response) {
+      res.status(error.response.status).set(error.response.headers).send(error.response.data);
+    } else {
+      console.error('API Gateway error:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });  
+});
 
 // Start the server
 const port = 4000;

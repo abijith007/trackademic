@@ -3,14 +3,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const envPath = path.join(__dirname, '../../', '.env');
+const envPath = path.join(__dirname, '../', '.env');
 require('dotenv').config({ path: envPath });
 const { spawn } = require('child_process');
 const app = express();
-const PORT = 3002;
+const PORT = 4003;
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({origin:process.env.REACT_SERVICE, credentials: true}));
 app.use("/chatbot", (req, res) => {
+  console.log("Message received")
   const textFromChatbot = req.body.message;
   const pythonProcess = spawn('python', ['nlp_client.py', textFromChatbot]);
   let pythonResponse = '';

@@ -1,6 +1,9 @@
 import { X } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
 import './Chatbot.css';
+import sendMessageChatBotService from '../../../services/sendMessageChatBotService';
+import createIssueService from '../../../services/createIssueService';
+import { useSelector } from 'react-redux';
 
 const ChatBubble = ({ message, time, sender, avatar, isUser }) => {
   const chatAlignment = isUser ? 'flex-row-reverse' : 'flex-row';
@@ -38,6 +41,7 @@ const Chatbot = () => {
       avatar: 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'
     }
   ]);
+  const [userID, setUserID] = useState(useSelector(state => state.user.userDetails.userID));
   const [newMessage, setNewMessage] = useState('');
   const endOfMessagesRef = useRef(null);
 
@@ -60,22 +64,20 @@ const Chatbot = () => {
 
     if (newMessage.trim() !== '') {
       try {
-        const response = await fetch('http://localhost:3002/chatbot', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ message: newMessage }),
-        });
-
-        if (!response.ok) {
+        const response = await sendMessageChatBotService({ message: newMessage });             
+        if (response.status !== 200) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const responseData = await response.json();
-
+        const responseData = await response.data;
         console.log('Backend Response:', responseData);
-
+        let payload = {
+          title: responseData.title,
+          description: responseData.description,
+          assignee: 1,
+          createdBy: userID,          
+        }
+        await createIssueService(payload);
         setMessages((prevMessages) => [
           ...prevMessages,
           {

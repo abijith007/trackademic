@@ -9,6 +9,8 @@ from nltk.tokenize.treebank import TreebankWordDetokenizer
 
 # Download NLTK resources (you may need to do this once)
 nltk.download("punkt")
+nltk.download('stopwords')
+
 
 def identify_title_description(text):
     # Tokenize the text into sentences
