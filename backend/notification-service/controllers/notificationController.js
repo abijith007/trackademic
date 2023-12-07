@@ -1,4 +1,6 @@
 const statusUpdate = require("../services/statusUpdate");
+const issueCreated = require("../services/issueCreated");
+const issueModified = require("../services/issueModified");
 
 async function notify(req,res){
   type = req.body.type;

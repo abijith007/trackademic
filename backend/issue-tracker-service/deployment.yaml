@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: issue-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: issue
+  template:
+    metadata:
+      labels:
+        component: issue
+    spec:
+      containers:
+        - name: issue
+          image: issue:latest
+          ports:
+            - containerPort: 4002          
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+          env:
+            - name: NOTIFICATION_SERVICE
+              value: notification-service.default.svc.cluster.local:4004
+            - name: SECRET_KEY
+              value: "secet_key"

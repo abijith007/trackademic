@@ -1,8 +1,8 @@
-const { Issues } = require('../ORM/models/models');
+const { Issues, Users } = require('../ORM/models/models');
 const { Storage } = require('@google-cloud/storage');
 const storage = new Storage({ keyFilename: '../trackademic.json' });
 const bucketName = 'trackademic';
-
+const axios = require('axios');
 module.exports = createIssueService = async (issueDetails, attachment) => {    
   // Create the issue in the database  
   console.log(issueDetails);
@@ -14,7 +14,7 @@ module.exports = createIssueService = async (issueDetails, attachment) => {
     assignee: issueDetails.assignee,    
   });
   const issueID = issue.dataValues.issueID;
-
+  const issueDataValues = issue.dataValues;
   if(!attachment) 
     return;
 
@@ -36,9 +36,21 @@ module.exports = createIssueService = async (issueDetails, attachment) => {
     const attachmentURL = `https://storage.googleapis.com/${bucketName}/${file.name}`;
 
     // Update the issue with the attachment URL
-    await Issues.update({ attachmentURL }, { where: { issueID } });
+    assignee_user = await Users.findByPk(issueDataValues.assignee);
+    created_by_user = await Users.findByPk(issueDataValues.createdBy);
+    console.log(assignee_user, created_by_user);
 
+    await Issues.update({ attachmentURL }, { where: { issueID } });
     console.log(`${attachment.originalname} uploaded to ${bucketName}. URL: ${attachmentURL}`);
+    axios.post(process.env.NOTIFICATION_SERVICE, {
+      type: 'issue-created',
+      title: issueDataValues.title,
+      description:issueDataValues.description,
+      createdBy: issueDataValues.createdBy,
+      assignee: assignee_user.firstName + ' ' + assignee_user.lastName,
+      issueID: issueID,
+      recipient: assignee_user.email + "; " + created_by_user.email,
+    })
   } catch (error) {
     console.error('Error uploading the file:', error);
   }

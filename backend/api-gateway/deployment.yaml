@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api-gateway
+  template:
+    metadata:
+      labels:
+        component: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: api-gateway:latest
+          ports:
+            - containerPort: 4000
+          env:
+            - name: REACT_SERVICE
+              value: react-service.default.svc.cluster.local:3000
+            - name: USER_SERVICE
+              value: user-service.default.svc.cluster.local:4001
+            - name: ISSUE_SERVICE
+              value: issue-service.default.svc.cluster.local:4002
+            - name: CHATBOT_SERVICE
+              value: chatbot-service.default.svc.cluster.local:4003
+            - name: NOTIFICATION_SERVICE
+              value: notification-service.default.svc.cluster.local:4004
+            - name: SECRET_KEY
+              value: "secret_key"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
