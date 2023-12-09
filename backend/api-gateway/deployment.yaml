@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: api-gateway:latest
+          image: abijith007/api-gateway:latest
           ports:
             - containerPort: 4000
           env:
@@ -32,10 +32,3 @@ spec:
               value: mysql://root:trackademic@123@35.222.238.222:3306/trackademic
             - name: SECRET_KEY
               value: "secret_key"
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
