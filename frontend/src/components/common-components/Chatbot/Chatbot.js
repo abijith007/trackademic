@@ -1,4 +1,4 @@
-import { X,StopCircle, Mic, Send } from 'lucide-react';
+import { StopCircle, Mic, Send } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
 import './Chatbot.css';
 import sendMessageChatBotService from '../../../services/sendMessageChatBotService';

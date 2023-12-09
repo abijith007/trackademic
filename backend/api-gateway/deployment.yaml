@@ -28,6 +28,8 @@ spec:
               value: chatbot-service.default.svc.cluster.local:4003
             - name: NOTIFICATION_SERVICE
               value: notification-service.default.svc.cluster.local:4004
+            - name: MYSQL_LINK
+              value: mysql://root:trackademic@123@35.222.238.222:3306/trackademic
             - name: SECRET_KEY
               value: "secret_key"
           resources:

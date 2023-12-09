@@ -1,20 +1,13 @@
-# Use an official Node runtime as the base image
-FROM node:14
-
-# Set the working directory in the container to /app
+# Build stage
+FROM node:18 as build
 WORKDIR /app
-
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install the application dependencies
+COPY package.json package-lock.json ./
 RUN npm install
-
-# Copy the rest of the application code to the working directory
 COPY . .
+RUN npm run build
 
-# Make port 3000 available outside the container
-EXPOSE 3000
-
-# Run the application when the container launches
-CMD ["npm", "start"]
+# Serve using Nginx
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-deployment
+  name: user-service-deployment
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
         component: react
     spec:
       containers:
-        - name: react
-          image: frontend:latest
+        - name: user-service
+          image: trackademic-user-service:latest
           ports:
             - containerPort: 3000
