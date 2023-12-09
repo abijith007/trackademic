@@ -1,16 +1,19 @@
-import { X } from 'lucide-react';
+import { X,StopCircle, Mic, Send } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
 import './Chatbot.css';
 import sendMessageChatBotService from '../../../services/sendMessageChatBotService';
 import createIssueService from '../../../services/createIssueService';
 import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faPaperPlane, faStop } from '@fortawesome/free-solid-svg-icons'; // Import necessary icons
 
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognition = new SpeechRecognition();
-
+let recognition;
+if ('SpeechRecognition' in window) {
+  recognition = new window.SpeechRecognition();
+} else if ('webkitSpeechRecognition' in window) {
+  recognition = new window.webkitSpeechRecognition();
+} else {
+  alert('Your Browser does not support Speech Recognition.');
+}
 const ChatBubble = ({ message, time, sender, avatar, isUser }) => {
   const chatAlignment = isUser ? 'flex-row-reverse' : 'flex-row';
   const chatBubbleColor = isUser ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black';
@@ -169,13 +172,13 @@ const Chatbot = () => {
               />
               <button type="button" onClick={handleSpeechRecognition} className="ml-2 p-2 bg-blue-500 text-white rounded-full">
                 {recording ? (
-                  <FontAwesomeIcon icon={faStop} />
+                  <StopCircle />
                 ) : (
-                  <FontAwesomeIcon icon={faMicrophone} />
+                  <Mic />
                 )}
               </button>
               <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded-full">
-                <FontAwesomeIcon icon={faPaperPlane} />
+              <Send />
               </button>
             </form>
           </div>
@@ -189,7 +192,7 @@ const Chatbot = () => {
               </div>
             </div>
             <span className='flex-1 text-start ms-4'>AI Assistant</span>
-            <FontAwesomeIcon icon={faMicrophone} className="cursor-pointer" onClick={toggleChat} />
+            <Mic className="cursor-pointer" onClick={toggleChat} />
           </button>
         </div>
       </div>
