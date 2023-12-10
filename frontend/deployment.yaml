@@ -18,5 +18,5 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: API_GATEWAY_SERVICE
+            - name: REACT_APP_API_GATEWAY_SERVICE
               value: api-gateway-service.default.svc.cluster.local:4000          

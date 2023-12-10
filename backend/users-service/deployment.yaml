@@ -1,8 +1,14 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-k8s-service-account
+  namespace: default
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-deployment
-spec:
+  name: user-service
+spec:  
   replicas: 1
   selector:
     matchLabels:
@@ -12,8 +18,16 @@ spec:
       labels:
         component: react
     spec:
+      serviceAccountName: my-k8s-service-account
       containers:
         - name: user-service
-          image: trackademic-user-service:latest
+          image: abijith007/trackademic-user-service:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 4001
+          env:
+            - name: NOTIFICATION_SERVICE
+              value: notification-service.default.svc.cluster.local:4004
+            - name: MYSQL_LINK
+              value: mysql://root:trackademic@123@35.222.238.222:3306/trackademic
+            - name: SECRET_KEY
+              value: "secret_key"
