@@ -9,7 +9,7 @@ const multer = require('multer');
 const { request } = require('http');
 const upload = multer();
 
-app.use(cors({origin: process.env.REACT_SERVICE, credentials: true}));
+app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 
 app.use('/users', (req, res, next) => {
