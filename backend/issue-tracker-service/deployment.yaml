@@ -16,6 +16,7 @@ spec:
       containers:
         - name: issue-service
           image: abijith007/trackademic-issue-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 4002                    
           env:

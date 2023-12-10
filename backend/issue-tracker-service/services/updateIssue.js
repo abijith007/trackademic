@@ -1,6 +1,6 @@
 const { Issues } = require('../ORM/models/models');
 const { Storage } = require('@google-cloud/storage');
-const storage = new Storage({ keyFilename: '../trackademic.json' });
+const storage = new Storage();
 const bucketName = 'trackademic';
 
 module.exports = updateIssueService = async (issueDetails) => {
@@ -18,7 +18,7 @@ module.exports = updateIssueService = async (issueDetails) => {
   }
 
   // If there's a new attachment, process it
-  if (attachment) {
+  if (attachment && attachment.name) {
     console.log('Received an attachment for update:');
 
     // Generate a unique file name for the attachment
@@ -37,7 +37,8 @@ module.exports = updateIssueService = async (issueDetails) => {
       });
     }
 
-    // Decode the base64 string and upload the new file
+    // Decode the base64 string and upload the new file    
+    console.log("BASE 64 data exists");
     const base64Data = Buffer.from(attachment.base64.split(',')[1], 'base64');
     const file = storage.bucket(bucketName).file(newFileName);
     console.log(`Uploading new file: ${newFileName}`);
@@ -54,6 +55,7 @@ module.exports = updateIssueService = async (issueDetails) => {
 
     // Update the issue details with the new attachment URL
     issueDetails.attachmentURL = newAttachmentURL;
+  
   }
 
   // Update the issue with the new details in the database
