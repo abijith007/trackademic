@@ -16,7 +16,7 @@ const PORT = 4001;
 const userRouter = express.Router();
 
 app.use(bodyParser.json());
-app.use(cors({origin: process.env.REACT_SERVICE, credentials: true}));
+app.use(cors({origin: true, credentials: true}));
 app.use(cookieParser())
 app.use('/users',userRouter);
 
@@ -24,7 +24,7 @@ app.use('/users',userRouter);
 userRouter.post('/signup', userSignup);
 userRouter.post('/login', userLogin);
 userRouter.get('/getUsers', getUsers);
-
+userRouter.get('/check')
 
 userRouter.post('/admin/signup', adminSignup);
 userRouter.post('/admin/login', adminLogin);

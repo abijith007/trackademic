@@ -4,7 +4,7 @@ metadata:
   name: user-service
 spec:
   selector:
-    component: react
+    component: user-service
   ports:
     - protocol: TCP
       port: 4001

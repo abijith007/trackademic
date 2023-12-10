@@ -21,13 +21,13 @@ spec:
             - name: REACT_SERVICE
               value: react-service.default.svc.cluster.local:3000
             - name: USER_SERVICE
-              value: user-service.default.svc.cluster.local:4001
+              value: http://user-service.default.svc.cluster.local:4001
             - name: ISSUE_SERVICE
-              value: issue-service.default.svc.cluster.local:4002
+              value: http://issue-service.default.svc.cluster.local:4002
             - name: CHATBOT_SERVICE
-              value: chatbot-service.default.svc.cluster.local:4003
+              value: http://chatbot-service.default.svc.cluster.local:4003
             - name: NOTIFICATION_SERVICE
-              value: notification-service.default.svc.cluster.local:4004
+              value: http://notification-service.default.svc.cluster.local:4004
             - name: MYSQL_LINK
               value: mysql://root:trackademic@123@35.222.238.222:3306/trackademic
             - name: SECRET_KEY

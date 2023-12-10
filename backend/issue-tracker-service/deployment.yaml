@@ -6,26 +6,22 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: issue
+      component: issue-service      
   template:
     metadata:
       labels:
-        component: issue
+        component: issue-service
     spec:
+      serviceAccountName: my-k8s-service-account
       containers:
-        - name: issue
-          image: issue:latest
+        - name: issue-service
+          image: abijith007/trackademic-issue-service:latest
           ports:
-            - containerPort: 4002          
-          resources:
-            limits:
-              cpu: "1"
-              memory: "512Mi"
-            requests:
-              cpu: "0.5"
-              memory: "256Mi"
+            - containerPort: 4002                    
           env:
             - name: NOTIFICATION_SERVICE
-              value: notification-service.default.svc.cluster.local:4004
+              value: http://notification-service.default.svc.cluster.local:4004
             - name: SECRET_KEY
               value: "secet_key"
+            - name: MYSQL_LINK
+              value: mysql://root:trackademic@123@10.55.16.3:3306/trackademic

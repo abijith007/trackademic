@@ -12,11 +12,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: react
+      component: user-service
   template:
     metadata:
       labels:
-        component: react
+        component: user-service
     spec:
       serviceAccountName: my-k8s-service-account
       containers:
@@ -28,6 +28,6 @@ spec:
             - name: NOTIFICATION_SERVICE
               value: notification-service.default.svc.cluster.local:4004
             - name: MYSQL_LINK
-              value: mysql://root:trackademic@123@35.222.238.222:3306/trackademic
+              value: mysql://root:trackademic@123@10.55.16.3:3306/trackademic
             - name: SECRET_KEY
               value: "secret_key"

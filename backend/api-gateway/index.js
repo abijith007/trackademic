@@ -12,6 +12,10 @@ const upload = multer();
 app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 
+app.use('/check', (req,res)=>{
+  res.send("Connection Successful")
+});
+
 app.use('/users', (req, res, next) => {
   const apiUrl = process.env.USER_SERVICE + req.originalUrl;    
   console.log(apiUrl)

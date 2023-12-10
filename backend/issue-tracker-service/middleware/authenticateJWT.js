@@ -9,6 +9,7 @@ console.log("\n\n",SECRET_KEY,"\n\n")
 
 function authenticateJWT(req, res, next) {  
 
+  console.log("Cookies:",req.cookies);
   const token = req.cookies.token;   
   if (!token) {
     return res.status(401).send('Access Denied');

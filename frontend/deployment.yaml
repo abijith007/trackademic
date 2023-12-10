@@ -19,4 +19,4 @@ spec:
             - containerPort: 3000
           env:
             - name: REACT_APP_API_GATEWAY_SERVICE
-              value: api-gateway-service.default.svc.cluster.local:4000          
+              value: http://35.188.111.223:4000          

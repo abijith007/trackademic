@@ -22,8 +22,8 @@ async function loginUser(req, res) {
         // Set the token in the cookie
         res.cookie('token', token, {
             httpOnly: true, // The cookie is not accessible via client-side script
-            secure: process.env.NODE_ENV === 'production', // The cookie is sent over HTTPS only in production
-            sameSite: 'strict', // The cookie is not sent with cross-site requests
+            secure: false, // The cookie is sent over HTTPS only in production
+            sameSite: 'None', // The cookie is not sent with cross-site requests
             maxAge: 12 * 60 * 60 * 1000 // 12 hours in milliseconds
         });
 
