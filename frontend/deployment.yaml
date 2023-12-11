@@ -19,4 +19,4 @@ spec:
             - containerPort: 3000
           env:
             - name: REACT_APP_API_GATEWAY_SERVICE
-              value: http://34.68.192.23:4000          
+              value: http://34.29.159.177:4000          

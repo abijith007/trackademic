@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/', notificationRouter);
 
+notificationRouter.get('/check',(req,res)=>{res.send("Success")});
 notificationRouter.post('/notify', notify);
 
 

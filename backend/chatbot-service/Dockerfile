@@ -1,4 +1,4 @@
-# Use a specific version of Python as the base image
+# Use a specific version of Python as the base images
 FROM python:3.8
 
 # Set the working directory inside the container
@@ -16,12 +16,20 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Install Python dependencies from requirements.txt
+# Create a virtual environment in the /app/venv directory
+RUN python -m venv /app/venv
+
+# Activate the virtual environment
+ENV PATH="/app/venv/bin:$PATH"
+
+# Install Python dependencies from requirements.txt inside the virtual environment
 RUN pip install -r requirements.txt
+
+# Download the spaCy model
 RUN python -m spacy download en_core_web_sm
+
 # Expose the port on which the server will run
 EXPOSE 4003
 
-RUN echo Starting
-# Start the server
+# Start the server using the virtual environment's Python
 CMD [ "node", "index.js" ]

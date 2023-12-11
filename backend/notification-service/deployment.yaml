@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: notification
+      component: notification-service
   template:
     metadata:
       labels:
-        component: notification
+        component: notification-service
     spec:
       containers:
-        - name: notification
+        - name: notification-service
           image: abijith007/trackademic-notification-service:latest  
           imagePullPolicy: Always        
           ports:

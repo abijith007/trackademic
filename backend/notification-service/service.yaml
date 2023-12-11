@@ -4,7 +4,7 @@ metadata:
   name: notification-service
 spec:
   selector:
-    component: react
+    component: notification-service
   ports:
     - protocol: TCP
       port: 4004
