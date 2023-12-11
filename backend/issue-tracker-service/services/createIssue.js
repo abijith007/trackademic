@@ -16,7 +16,7 @@ module.exports = createIssueService = async (issueDetails) => {
   });
   const issueID = issue.dataValues.issueID;
   const attachment = issueDetails.attachment;
-  if(attachment && attachment.base64) {
+  if(attachment && attachment.name) {
     try {
       // Generate a unique file name for the attachment using the issue ID and the original file name
       const referenceFileName = `issue_${issueID}_${attachment.name}`;
