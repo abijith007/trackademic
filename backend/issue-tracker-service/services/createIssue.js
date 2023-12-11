@@ -42,18 +42,18 @@ module.exports = createIssueService = async (issueDetails) => {
       // Update the issue with the attachment URL
       await Issues.update({ attachmentURL }, { where: { issueID } });
       console.log(`${attachment.name} uploaded to ${bucketName}. URL: ${attachmentURL}`);
-
-      axios.post(process.env.NOTIFICATION_SERVICE, {
-        type: 'issue-created',
-        title: issueDataValues.title,
-        description:issueDataValues.description,
-        createdBy: issueDataValues.createdBy,
-        assignee: assignee_user.firstName + ' ' + assignee_user.lastName,
-        issueID: issueID,
-        recipient: assignee_user.email + "; " + created_by_user.email,
-      })
+      
     } catch (error) {
       console.error('Error uploading the file:', error);
-    }
+    }    
   }
+  axios.post(process.env.NOTIFICATION_SERVICE, {
+    type: 'issue-created',
+    title: issueDataValues.title,
+    description:issueDataValues.description,
+    createdBy: issueDataValues.createdBy,
+    assignee: assignee_user.firstName + ' ' + assignee_user.lastName,
+    issueID: issueID,
+    recipient: assignee_user.email + "; " + created_by_user.email,
+  })
 };

@@ -24,7 +24,7 @@ app.use('/users',userRouter);
 userRouter.post('/signup', userSignup);
 userRouter.post('/login', userLogin);
 userRouter.get('/getUsers', getUsers);
-userRouter.get('/check')
+userRouter.get('/check', (req,res)=>{res.send("Success")})
 
 userRouter.post('/admin/signup', adminSignup);
 userRouter.post('/admin/login', adminLogin);

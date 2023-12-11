@@ -27,7 +27,7 @@ spec:
             - containerPort: 4001
           env:
             - name: NOTIFICATION_SERVICE
-              value: notification-service.default.svc.cluster.local:4004
+              value: http://notification-service.default.svc.cluster.local:4004
             - name: MYSQL_LINK
               value: mysql://root:trackademic@123@10.55.16.3:3306/trackademic
             - name: SECRET_KEY
