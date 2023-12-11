@@ -15,6 +15,7 @@ module.exports = createIssueService = async (issueDetails) => {
     assignee: issueDetails.assignee,    
   });
   const issueID = issue.dataValues.issueID;
+  const issueDataValues = issue.dataValues;
   const attachment = issueDetails.attachment;
   if(attachment && attachment.name) {
     try {
