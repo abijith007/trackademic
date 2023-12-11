@@ -13,14 +13,13 @@ spec:
         component: notification
     spec:
       containers:
-        - name: react
-          image: frontend:latest
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
+        - name: notification
+          image: abijith007/trackademic-notification-service:latest  
+          imagePullPolicy: Always        
           ports:
             - containerPort: 4004
+          env:
+            - name: GMAIL_USER
+              value: "parekhshakshi820@gmail.com"
+            - name: GMAIL_PASSWORD
+              value: "twtzvbxxqvgnpwwe"
