@@ -1,11 +1,13 @@
-
-# Use the official Node.js image as the base image
-FROM node:14
+# Use a specific version of Python as the base image
+FROM python:3.8
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Install Node.js
+RUN apt-get update && apt-get install -y nodejs npm
+
+# Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
 # Install Node.js dependencies
@@ -14,16 +16,12 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Set the environment variable for the Python program
-ENV PYTHONPATH=/app
-
-# Install Python and required packages
-RUN apt-get update && apt-get install -y python3 python3-pip
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
-
-# Expose the port on which the Node.js server will run
+# Install Python dependencies from requirements.txt
+RUN pip install -r requirements.txt
+RUN python -m spacy download en_core_web_sm
+# Expose the port on which the server will run
 EXPOSE 4003
 
-# Start the Node.js server
+RUN echo Starting
+# Start the server
 CMD [ "node", "index.js" ]
