@@ -1,2 +1,3 @@
 nltk
-spacy
+spacy==3.6.1
+pydantic==2.4.1

@@ -52,7 +52,7 @@ module.exports = createIssueService = async (issueDetails) => {
   let assignee_user = await Users.findOne({where: {userID: issueDetails.assignee}});
   let created_by_user = await Users.findOne({where: {userID: issueDetails.createdBy}});
   
-  axios.post(process.env.NOTIFICATION_SERVICE, {
+  axios.post(process.env.NOTIFICATION_SERVICE+'/notify', {
     type: 'issue-created',
     title: issueDataValues.title,
     description:issueDataValues.description,
