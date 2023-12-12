@@ -14,7 +14,7 @@ const issuesRouter = express.Router();
 const app = express();
 const PORT = 4002;
 
-const { getIssues, getIssueById, getIssuesByFilter, createIssue, updateIssue} = require('./controllers/IssuesController');
+const { getIssues, getIssueById, getIssuesByFilter, createIssue, updateIssue, getDashboard} = require('./controllers/IssuesController');
 
 app.use(bodyParser.json());
 app.use(cors({origin:process.env.REACT_SERVICE, credentials: true}));
@@ -27,6 +27,7 @@ issuesRouter.get('/issueByID', getIssueById);
 issuesRouter.get('/issuesByFilter', getIssuesByFilter);
 issuesRouter.post('/create', createIssue);
 issuesRouter.post('/update', updateIssue);
+issuesRouter.get('/dashboard', getDashboard)
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

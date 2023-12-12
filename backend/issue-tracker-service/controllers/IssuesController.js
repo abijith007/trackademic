@@ -3,6 +3,7 @@ const getIssuesService = require('../services/getIssues.js');
 const getIssuesByFilterService = require('../services/getIssuesByFilter.js');
 const updateIssueService = require('../services/updateIssue.js');
 const createIssueService = require('../services/createIssue.js');
+const getDashboardService = require('../services/getDashboard.js');
 
 
 async function getIssues(req, res) {
@@ -29,4 +30,9 @@ async function createIssue(req, res) {
   res.send({message:"Success"})
 }
 
-module.exports = {getIssues, getIssueById, getIssuesByFilter, createIssue, updateIssue};
+async function getDashboard(req, res) {
+  const response = await getDashboardService();
+  res.send(response);
+}
+
+module.exports = {getIssues, getIssueById, getIssuesByFilter, createIssue, updateIssue, getDashboard};
