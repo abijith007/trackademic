@@ -219,6 +219,21 @@ const IssueList = () => {
     );
   };
 
+  function getStatusClass(status) {
+    switch (status) {
+      case 'Open':
+        return 'primary';
+      case 'In Progress':
+        return 'warning';
+      case 'Resolved':
+        return 'success'
+      case 'Blocked':
+        return 'danger';
+      default:
+        return 'secondary';
+    }
+  }
+
   return (
     <div className="m-5 p-2.5 bg-white w-full rounded-3xl shadow-xl">
       <div className="overflow-x-auto">
@@ -253,22 +268,38 @@ const IssueList = () => {
           <tbody>
             {paginatedData.map((item) => (
               <tr key={item.issueID} onClick={() => openModal(item)} className="cursor-pointer">
-                <td className='p-4'>{item.issueID}</td>
-                <td className='p-4'>{item.title}</td>
-                <td className='p-4'>{item.description}</td>
-                <td className='p-4'>{item.status}</td>
-                <td className='p-4'>
+                <td className='p-1 text-center'>{item.issueID}</td>
+                <td className='p-1'>{item.title}</td>
+                <td className='p-1'>{item.description}</td>
+                <td className={`p-1  text-center  my-auto mx-auto bg-${getStatusClass(item.status)} bg-gradient`}>{item.status}</td>
+                <td className='p-1 text-center'>
                   {
                     (() => {
                       const assignee = assigneeList.find(x => Number(x.userID) === Number(item.assignee));
-                      return assignee ? `${assignee.firstName} ${assignee.lastName}` : 'N/A';
+                      return assignee.profilePhoto ? <div className="avatar rounded-full"  title={assignee.firstName +' '+ assignee.lastName}>
+                        <div className="w-12 rounded-full">
+                          <img src={assignee.profilePhoto} />
+                        </div>
+                      </div> : <div className="avatar placeholder rounded-full"  title={assignee.firstName +' '+ assignee.lastName}>
+                        <div className="bg-neutral text-neutral-content rounded-full w-12 cursor-pointer">
+                          <span className="text-xs">{assignee.firstName[0]} {assignee.lastName[0]}</span>
+                        </div>
+                      </div>;
                     })()
                   }
                 </td>
-                <td className='p-4'>{
+                <td className='p-1 text-center'>{
                   (() => {
                     const assignee = assigneeList.find(x => Number(x.userID) === Number(item.createdBy));
-                    return assignee ? `${assignee.firstName} ${assignee.lastName}` : 'N/A';
+                    return assignee.profilePhoto ? <div className="avatar rounded-full"  title={assignee.firstName +' '+ assignee.lastName}>
+                      <div className="w-12 rounded-full">
+                        <img src={assignee.profilePhoto} />
+                      </div>
+                    </div> : <div className="avatar placeholder rounded-full cursor-pointer" title={assignee.firstName +' '+ assignee.lastName}>
+                      <div className="bg-neutral text-neutral-content rounded-full w-12 cursor-pointer">
+                        <span className="text-xs">{assignee.firstName[0]} {assignee.lastName[0]}</span>
+                      </div>
+                    </div>;
                   })()
                 }      </td>
               </tr>
@@ -312,10 +343,11 @@ const IssueList = () => {
                     onChange={(e) => setEditableIssue({ ...editableIssue, status: e.target.value })}
                     className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   >
-                    <option value="todo">To Do</option>
-                    <option value="inProgress">In Progress</option>
-                    <option value="blocked">Blocked</option>
-                    <option value="done">Done</option>
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Blocked">Blocked</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Resolved">Resolved</option>
                   </select>
                 </div>
                 <div className="mb-2">
