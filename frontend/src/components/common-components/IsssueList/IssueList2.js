@@ -85,6 +85,7 @@ const IssueList = () => {
       assignee: editableIssue.assignee,
       createdBy: editableIssue.createdBy,
       attachmentURL: editableIssue.attachmentURL,
+      assignee: Number(editableIssue.assignee),
       attachment: attachmentDetails
     }
     await updateIssueService(payload);
@@ -348,6 +349,16 @@ const IssueList = () => {
                     <option value="Blocked">Blocked</option>
                     <option value="Closed">Closed</option>
                     <option value="Resolved">Resolved</option>
+                  </select>
+                </div>
+                <div className="mb-2">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">Assignee</label>
+                  <select
+                    value={editableIssue.assignee}
+                    onChange={(e) => setEditableIssue({ ...editableIssue, assignee: e.target.value })}
+                    className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  >
+                    {assigneeList.map((user) => (<option value={user.userID}>{user.firstName + ' ' + user.lastName}</option>))}
                   </select>
                 </div>
                 <div className="mb-2">

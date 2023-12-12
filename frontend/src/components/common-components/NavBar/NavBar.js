@@ -8,7 +8,7 @@ function NavBar() {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [profilePhoto, setprofilePhoto] = useState(useSelector(state => state.user.userDetails.profilePhotoLink));
+  const [profilePhoto, setprofilePhoto] = useState(useSelector(state => state.user?.userDetails?.profilePhotoLink));
   const goTo = (page) => () => {    
     navigate('/' + page);
   };
