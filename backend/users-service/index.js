@@ -9,13 +9,13 @@ require('dotenv').config({ path: envPath });
 const { authenticateJWT } = require('./middleware/authenticateJWT');
 const { userLogin, adminLogin } = require('./controllers/loginController');
 const { userSignup, adminSignup } = require('./controllers/signupController');
-const { getUsers } = require('./controllers/userController');
+const { getUsers, updateUser, getUserByID } = require('./controllers/userController');
 
 const app = express();
 const PORT = 4001;
 const userRouter = express.Router();
 
-app.use(bodyParser.json());
+app.use(express.json({ limit: '50mb' }));
 app.use(cors({origin: true, credentials: true}));
 app.use(cookieParser())
 app.use('/users',userRouter);
@@ -24,8 +24,9 @@ app.use('/users',userRouter);
 userRouter.post('/signup', userSignup);
 userRouter.post('/login', userLogin);
 userRouter.get('/getUsers', getUsers);
+userRouter.get('/getUserByID', getUserByID);
 userRouter.get('/check', (req,res)=>{res.send("Success")})
-
+userRouter.post('/update', updateUser);
 userRouter.post('/admin/signup', adminSignup);
 userRouter.post('/admin/login', adminLogin);
 

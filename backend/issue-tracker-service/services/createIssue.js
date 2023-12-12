@@ -10,7 +10,7 @@ module.exports = createIssueService = async (issueDetails) => {
   const issue = await Issues.create({
     title: issueDetails.title,
     description: issueDetails.description,
-    status: 'todo',
+    status: 'Open',
     createdBy: issueDetails.createdBy,
     assignee: issueDetails.assignee,    
   });
