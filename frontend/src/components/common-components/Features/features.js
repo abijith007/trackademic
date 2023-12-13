@@ -20,12 +20,12 @@ const FeaturesSection = ({ features }) => {
           </div>
         ))}
         {hoveredFeature !== null && (
-          <div className="rounded-full overflow-hidden w-80 h-auto bg-white border shadow-md absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-4 z-30">
+          <div className="rounded-full overflow-hidden w-84 h-auto bg-white border shadow-md absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-4 z-30">
             <div className="p-6">
               <h3 className="text-lg font-semibold mb-2 text-gray-800">
                 {features[hoveredFeature].title}
               </h3>
-              <p className="text-lg font-semibold text-gray-800">
+              <p className="text-md font-semibold text-gray-800">
                 {features[hoveredFeature].description}
               </p>
             </div>
