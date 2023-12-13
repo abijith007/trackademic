@@ -91,19 +91,6 @@ function NavBar() {
           </div>
         </div>
       )}
-
-      {/* Unchanged styles for "Feature," "Team," and "About Us" buttons */}
-      <div className="flex gap-2 me-3">
-        <button className="btn btn-light btn-sm" onClick={goTo('feature')}>
-          Feature
-        </button>
-        <button className="btn btn-light btn-sm" onClick={goTo('team')}>
-          Team
-        </button>
-        <button className="btn btn-light btn-sm" onClick={goTo('about')}>
-          About Us
-        </button>
-      </div>
     </div>
   );
 }
