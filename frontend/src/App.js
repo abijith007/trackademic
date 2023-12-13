@@ -10,6 +10,7 @@ import HomePage from './components/HomePage/HomePage';
 import AboutUs from './components/AboutUs/AboutUs';
 import Issues from './components/Issues/Issues';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import UserProfile from './components/UserProfile/UserProfile';
 
 function App() {
   // ...other code...
@@ -30,6 +31,12 @@ function App() {
             <Issues />
           </ProtectedRoute>
         } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <UserProfile />
+          </ProtectedRoute>
+        } />
+        
         <Route path="/about-us" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
       </Routes>
     </Router>

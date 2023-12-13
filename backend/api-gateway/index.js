@@ -9,11 +9,16 @@ const multer = require('multer');
 const { request } = require('http');
 const upload = multer();
 
-app.use(cors({origin: process.env.REACT_SERVICE, credentials: true}));
-app.use(express.json());
+app.use(cors({origin: true, credentials: true}));
+app.use(express.json({ limit: '50mb' }));
+
+app.use('/check', (req,res)=>{
+  res.send("Connection Successful")
+});
 
 app.use('/users', (req, res, next) => {
-  const apiUrl = 'http://localhost:4001' + req.originalUrl;    
+  const apiUrl = process.env.USER_SERVICE + req.originalUrl;    
+  console.log(apiUrl)
   axios({
     method: req.method,
     url: apiUrl,
@@ -34,7 +39,7 @@ app.use('/users', (req, res, next) => {
 });
 
 app.use('/issues', (req, res, next) => {
-  const apiUrl = 'http://localhost:4002' + req.originalUrl;    
+  const apiUrl = process.env.ISSUE_SERVICE + req.originalUrl;    
   axios({
     method: req.method,
     url: apiUrl,
@@ -55,7 +60,7 @@ app.use('/issues', (req, res, next) => {
 });
 
 app.use('/chatbot', (req, res, next) => {
-  const apiUrl = 'http://localhost:4003' + req.originalUrl;    
+  const apiUrl = process.env.CHATBOT_SERVICE + req.originalUrl;    
   axios({
     method: req.method,
     url: apiUrl,

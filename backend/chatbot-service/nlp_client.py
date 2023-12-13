@@ -7,6 +7,7 @@ from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from nltk.tokenize.treebank import TreebankWordDetokenizer
 
+# python -m spacy download en_core_web_sm
 # Download NLTK resources (you may need to do this once)
 nltk.download("punkt")
 nltk.download('stopwords')

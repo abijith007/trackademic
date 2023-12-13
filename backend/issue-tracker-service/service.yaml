@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: issue-service
+spec:
+  selector:
+    component: issue-service
+  ports:
+    - protocol: TCP
+      port: 4002
+      targetPort: 4002
+  type: ClusterIP

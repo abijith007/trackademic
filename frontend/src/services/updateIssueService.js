@@ -1,9 +1,9 @@
 import axios from 'axios'
-const apiUrl = process.env.REACT_APP_ISSUE_SERVICE;
+const apiUrl = process.env.REACT_APP_API_GATEWAY_SERVICE;
 
 const updateIssueService = async (issueDetails) => {
   try {
-    const response = await axios.put(`${apiUrl}/issues/update`,
+    const response = await axios.post(`${apiUrl}/issues/update`,
      issueDetails
     ,{      withCredentials: true
     });     

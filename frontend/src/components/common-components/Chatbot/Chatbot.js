@@ -1,10 +1,19 @@
-import { X } from 'lucide-react';
+import { StopCircle, Mic, Send } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
 import './Chatbot.css';
 import sendMessageChatBotService from '../../../services/sendMessageChatBotService';
 import createIssueService from '../../../services/createIssueService';
 import { useSelector } from 'react-redux';
 
+
+let recognition;
+if ('SpeechRecognition' in window) {
+  recognition = new window.SpeechRecognition();
+} else if ('webkitSpeechRecognition' in window) {
+  recognition = new window.webkitSpeechRecognition();
+} else {
+  alert('Your Browser does not support Speech Recognition.');
+}
 const ChatBubble = ({ message, time, sender, avatar, isUser }) => {
   const chatAlignment = isUser ? 'flex-row-reverse' : 'flex-row';
   const chatBubbleColor = isUser ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black';
@@ -41,10 +50,11 @@ const Chatbot = () => {
       avatar: 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'
     }
   ]);
-  const [userID, setUserID] = useState(useSelector(state => state.user.userDetails.userID));
   const [newMessage, setNewMessage] = useState('');
   const endOfMessagesRef = useRef(null);
+  const [recording, setRecording] = useState(false);
 
+  const [userID, setUserID] = useState(useSelector(state => state.user.userDetails.userID));
   const scrollToBottom = () => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -111,6 +121,29 @@ const Chatbot = () => {
     }
   };
 
+  const handleSpeechRecognition = () => {
+    if (!recording) {
+      recognition.start();
+    } else {
+      recognition.stop();
+    }
+  };
+
+  recognition.onresult = (event) => {
+    const last = event.results.length - 1;
+    const message = event.results[last][0].transcript;
+
+    setNewMessage(message);
+  };
+
+  recognition.onstart = () => {
+    setRecording(true);
+  };
+
+  recognition.onend = () => {
+    setRecording(false);
+  };
+
   return (
     <div className="fixed bottom-0 right-0 mb-5 mr-4">
       <div className={`transition-transform duration-500 ${showChat ? 'translate-y-12' : 'translate-y-full'} max-w-[450px] w-full rounded-t-xl shadow-xl`}>
@@ -137,8 +170,15 @@ const Chatbot = () => {
                 className="w-full p-2 border rounded-md"
                 placeholder="Type your message..."
               />
+              <button type="button" onClick={handleSpeechRecognition} className="ml-2 p-2 bg-blue-500 text-white rounded-full">
+                {recording ? (
+                  <StopCircle />
+                ) : (
+                  <Mic />
+                )}
+              </button>
               <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded-full">
-                ➔
+              <Send />
               </button>
             </form>
           </div>
@@ -152,7 +192,7 @@ const Chatbot = () => {
               </div>
             </div>
             <span className='flex-1 text-start ms-4'>AI Assistant</span>
-            <X className="cursor-pointer" onClick={toggleChat} />
+            <Mic className="cursor-pointer" onClick={toggleChat} />
           </button>
         </div>
       </div>

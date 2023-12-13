@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: react
+  template:
+    metadata:
+      labels:
+        component: react
+    spec:
+      containers:
+        - name: react
+          image: abijith007/trackademic-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_GATEWAY_SERVICE
+              value: http://34.118.225.10:4000          

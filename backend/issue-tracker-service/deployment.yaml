@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: issue-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: issue-service      
+  template:
+    metadata:
+      labels:
+        component: issue-service
+    spec:
+      serviceAccountName: my-k8s-service-account
+      containers:
+        - name: issue-service
+          image: abijith007/trackademic-issue-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4002                    
+          env:
+            - name: NOTIFICATION_SERVICE
+              value: http://notification-service.default.svc.cluster.local:4004
+            - name: SECRET_KEY
+              value: "secet_key"
+            - name: MYSQL_LINK
+              value: mysql://root:trackademic@123@10.55.16.3:3306/trackademic

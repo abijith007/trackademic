@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api-gateway
+  template:
+    metadata:
+      labels:
+        component: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: abijith007/trackademic-api-gateway:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+          env:
+            - name: REACT_SERVICE
+              value: react-service.default.svc.cluster.local:3000
+            - name: USER_SERVICE
+              value: http://user-service.default.svc.cluster.local:4001
+            - name: ISSUE_SERVICE
+              value: http://issue-service.default.svc.cluster.local:4002
+            - name: CHATBOT_SERVICE
+              value: http://chatbot-service.default.svc.cluster.local:4003
+            - name: NOTIFICATION_SERVICE
+              value: http://notification-service.default.svc.cluster.local:4004
+            - name: MYSQL_LINK
+              value: mysql://root:trackademic@123@35.222.238.222:3306/trackademic
+            - name: SECRET_KEY
+              value: "secret_key"

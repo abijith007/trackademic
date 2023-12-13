@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize('mysql://root:password@localhost:3306/trackademic'); 
+const MYSQL_LINK = process.env.MYSQL_LINK;
+const sequelize = new Sequelize(MYSQL_LINK); 
 
 sequelize.sync()
     .then(() => {

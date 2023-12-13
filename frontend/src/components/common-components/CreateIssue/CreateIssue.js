@@ -38,9 +38,16 @@ const CreateIssue = () => {
     const title = event.target.elements.title.value;
     const description = event.target.elements.description.value;    
     const assignee = event.target.elements.assignee.value;    
-    let attachment = '';
+    let attachmentDetails = {};
     if (file) {
-      attachment = await fileToBase64(file); // Await the resolution of the promise
+      const base64 = await fileToBase64(file);
+      attachmentDetails = {
+        base64: base64,
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        lastModified: file.lastModified
+      };
     }
 
     let payload = {
@@ -48,9 +55,8 @@ const CreateIssue = () => {
       description: description,
       assignee: assignee,
       createdBy: userID,
-      attachment: attachment
-    }
-     console.log(attachment); 
+      attachment: attachmentDetails
+    }     
     await createIssueService(payload);
     setFile(null);
     handleCloseModal();

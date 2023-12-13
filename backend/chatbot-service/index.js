@@ -17,6 +17,7 @@ app.use("/chatbot", (req, res) => {
   let pythonResponse = '';
   pythonProcess.stdout.on('data', (data) => {
     pythonResponse += data.toString();
+    console.log(pythonResponse);
   });
   pythonProcess.on('close', (code) => {
     if (code === 0) {

@@ -3,14 +3,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../../redux/actions/userActions';
-// ... (previous imports)
+import { useState } from 'react';
 
 function NavBar() {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const goTo = (page) => () => {
+  const [profilePhoto, setprofilePhoto] = useState(useSelector(state => state.user?.userDetails?.profilePhotoLink));
+  const goTo = (page) => () => {    
     navigate('/' + page);
   };
 
@@ -55,11 +55,9 @@ function NavBar() {
         <div className="flex gap-2 me-3">
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-8 rounded-full">
-                <img
-                  src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"
-                  alt="User Avatar"
-                />
+
+              <div className="w-10 rounded-full">
+                <img src={profilePhoto != "" ? profilePhoto : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} alt="User Avatar" />                
               </div>
             </label>
             <ul

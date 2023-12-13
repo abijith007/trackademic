@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { Credentials } = require("../ORM/models/models");
+const { Credentials, Users } = require("../ORM/models/models");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 async function loginUser(req, res) {
@@ -18,17 +18,16 @@ async function loginUser(req, res) {
         }
 
         const token = jwt.sign({ email: email }, SECRET_KEY, { expiresIn: '12h' });
-
+        let userDetails = await Users.findOne({ where: { userID: user.userID } })
         // Set the token in the cookie
         res.cookie('token', token, {
             httpOnly: true, // The cookie is not accessible via client-side script
-            secure: process.env.NODE_ENV === 'production', // The cookie is sent over HTTPS only in production
-            sameSite: 'strict', // The cookie is not sent with cross-site requests
+            secure: false, // The cookie is sent over HTTPS only in production
+            sameSite: 'None', // The cookie is not sent with cross-site requests
             maxAge: 12 * 60 * 60 * 1000 // 12 hours in milliseconds
-        });
-
+        });        
         // Send response
-        res.json({ message: 'Logged in successfully', userDetails: { userID: user.userID } });
+        res.json({ message: 'Logged in successfully', userDetails: { userID: userDetails.userID, profilePhotoLink: userDetails.profilePhoto } });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Internal server error' });
