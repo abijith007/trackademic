@@ -1,6 +1,6 @@
 // TimelineSection.js
 import React from "react";
-import imgTemp from "../../assets/abijith.jpg";
+import imgTemp from "../../assets/chatbot.jpg";
 
 function TimelineSection() {
   const containerStyle = {

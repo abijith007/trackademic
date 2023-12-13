@@ -1,6 +1,6 @@
 // Speech.js
 import React from 'react';
-import imgTemp from "../../assets/abijith.jpg";
+import imgTemp from "../../assets/speech.jpg";
 
 const Speech = () => {
   const containerStyle = {
