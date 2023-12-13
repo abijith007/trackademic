@@ -8,8 +8,9 @@ import updateUserService from '../../services/updateUserService';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useDispatch } from 'react-redux';
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -90,7 +91,7 @@ const handleSubmit = async (e) => {
     }
   }
   try {
-    const response = await updateUserService(payload);
+    const response = await updateUserService(payload, dispatch);
     console.log(response);
     if(!response)
       throw new Error("Error updating profile");

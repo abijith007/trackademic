@@ -5,6 +5,7 @@ export const setUser = (userDetails) => {
   };
 };
 
+
 export const logout = () => {
   return {
     type: 'LOGOUT',

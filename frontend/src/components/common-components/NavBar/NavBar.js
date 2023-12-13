@@ -2,16 +2,24 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/actions/userActions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function NavBar() {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [profilePhoto, setprofilePhoto] = useState(useSelector(state => state.user?.userDetails?.profilePhotoLink));
+  const profilePhotoLink = useSelector(state => state.user?.userDetails?.profilePhoto);
+  console.log(profilePhotoLink)
+  const [profilePhoto, setProfilePhoto] = useState(profilePhotoLink);
   const goTo = (page) => () => {    
     navigate('/' + page);
   };
+
+
+ useEffect(() => {
+    setProfilePhoto(profilePhotoLink);
+  }, [profilePhotoLink]);
+
 
   const handleLogout = () => () => {
     dispatch(logout());    
@@ -28,7 +36,7 @@ function NavBar() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={profilePhoto != "" ? profilePhoto : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} alt="User Avatar" />                
+                <img src={profilePhoto != "" && !profilePhoto ? profilePhoto : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} alt="User Avatar" />                
               </div>
             </label>
             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-primary-100 rounded-box w-52">
