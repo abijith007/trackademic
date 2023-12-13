@@ -23,7 +23,8 @@ async function updateUserService(req, res) {
     profilePhotoLink = `https://storage.googleapis.com/${bucketName}/${file.name}`;
   }
   await Users.update({ firstName: userDetails.firstName, lastName: userDetails.lastName, email: userDetails.email, profilePhoto: profilePhotoLink }, { where: { userID: userDetails.userID } });
-  res.send({ message: 'Update Successful' });
+  let userFromDB = await Users.findOne({ where: { userID: userDetails.userID } });
+  res.send({ message: 'Update Successful', userDetails: userFromDB });
 
 }
 

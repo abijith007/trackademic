@@ -27,7 +27,8 @@ async function loginUser(req, res) {
             maxAge: 12 * 60 * 60 * 1000 // 12 hours in milliseconds
         });        
         // Send response
-        res.json({ message: 'Logged in successfully', userDetails: { userID: userDetails.userID, profilePhotoLink: userDetails.profilePhoto } });
+        const userFromDB = await Users.findByPk(userDetails.userID);
+        res.json({ message: 'Logged in successfully', userDetails: userFromDB });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Internal server error' });
