@@ -1,8 +1,8 @@
 // Timeline.js
 import React from 'react';
-import imgTemp from "../../assets/temp.jpg";
+import imgTemp from "../../assets/abijith.jpg";
 
-const Timeline = () => {
+const Timeline = () => {  
   const containerStyle = {
     display: 'flex',
     alignItems: 'center',

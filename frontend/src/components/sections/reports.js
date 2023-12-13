@@ -1,6 +1,6 @@
 // Report.js
 import React from 'react';
-import imgTemp from "../../assets/temp.jpg";
+import imgTemp from "../../assets/abijith.jpg";
 
 const Report = () => {
   const containerStyle = {
